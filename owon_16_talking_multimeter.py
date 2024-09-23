@@ -39,8 +39,9 @@ MODEL_ADDR="A6:C0:80:90:2D:DB"
 CHAR_NBR_UUID = "0000fff4-0000-1000-8000-00805f9b34fb"
 
 # window application configuration dictionary
-config_default  = {"windows_width": 1400,
-          "windows_height": 800,
+config_default  = {"windows_width": 1400, # inital window width
+          "windows_height": 800, # inital window height 
+          "WINDOW_SCREEN_FACTOR": 85, # main window size is the factor of the screen signe (< 1.0) once window is created 
           "color_foreground":(255,255,0),
           "color_background":(0,0,0),
           "font":u'Consolas',
@@ -129,11 +130,11 @@ class MyFrame(wx.Frame):
         screen_width, screen_height = wx.GetDisplaySize()
         
         # factor for main window size from screen size  
-        WINDOW_SCREEN_FACTOR = 0.85 
+        # WINDOW_SCREEN_FACTOR = 0.85
 
         # Calculer les nouvelles dimensions de la fenêtre (85% des dimensions de l'écran)
-        window_width = int(screen_width * WINDOW_SCREEN_FACTOR)
-        window_height = int(screen_height * WINDOW_SCREEN_FACTOR)
+        window_width = int(screen_width * config_default["WINDOW_SCREEN_FACTOR"])
+        window_height = int(screen_height * config_default["WINDOW_SCREEN_FACTOR"])
         
         # Définir la taille et la position de la fenêtre
         self.SetSize(window_width, window_height)

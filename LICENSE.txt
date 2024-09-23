@@ -1,0 +1,7 @@
+project published under CECILL license 
+
+ce projet est publié en opensource (libre et gratuit) sous licence libre CECIL.
+
+http://cecill.info/licences/Licence_CeCILL_V1-fr.html 
+
+creative commun : CC BY-SA 

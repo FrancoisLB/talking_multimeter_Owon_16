@@ -34,9 +34,13 @@ Folowing modules are used :
 
 see requirements.txt file 
 
+to create executable file from .py file, please use pyinstaller python module. 
+command is :
+    pyinstaller  --onefile owon_16_talking_multimeter.py
+
 ## License 
-This tool is developed under CC by SA-NC license. 
-it is free and open source.
+This tool is developed under CC BY SA license. 
+It is free and open source.
 any modification of the code have to be published in the same terms.
  
 ## Developers

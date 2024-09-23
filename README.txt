@@ -13,7 +13,7 @@ Following shortcuts are defined :
     * Alt + F4 : close the main application window 
     * F4 : indicates the status of the BLE link (connected or not) 
     * F5 : announces the value of the measurement
-	* F8 : copy measure to clipboard 
+    * F8 : copy measure to clipboard 
 
 Two internal dictionnaries are used :
 * for protocol data exchange (measurements, data type and units, and gain)

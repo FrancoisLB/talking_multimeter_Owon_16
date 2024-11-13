@@ -29,9 +29,12 @@ import time
 import pyttsx3
 import json
 
+# import class to read OWON 16 data structure 
+from owon_16_data_structure_class import Owon_MultimeterData
+
 # file information 
-__date__ = "2024_09_23" 
-__version__ = "1.0" 
+__date__ = "2024_11_12" 
+__version__ = "1.1" 
 
 # OWON 16
 MODEL_NAME="BDM"
@@ -315,8 +318,21 @@ class MyFrame(wx.Frame):
             """
             print("Device was disconnected, goodbye.")
 
-            
+        
         def decode_value (data: bytearray):
+            """decode data byte array send by Owon, according to type and factor value (see dict dictionnary)
+
+            :param data: data byte array received from Owon 
+            """
+            decoded_data = Owon_MultimeterData (data)
+            print(decoded_data)
+            #unit=str(decoded_data.unit_name)
+            #value=str(decoded_data.value)
+            #print(unit, value)
+            #return (f'{decoded_data.unit_name()}', f'{decoded_data.value()} {decoded_data.unit_name()}')
+            return (str(decoded_data.unit_name), f'{str(decoded_data.value)} {str(decoded_data.unit_name)}')
+        
+        def decode_value_1 (data: bytearray):
             """decode data byte array send by Owon 16, 
                according to type and factor value (see dict dictionnary)
 
@@ -348,12 +364,15 @@ class MyFrame(wx.Frame):
             # self.mesure_valeur.SetLabel(data.decode())
             if data is not None:
                 print("received:", decode_value(data))
+
+                #ici ajouter des valeur dans le tuple 
                 selecteur,value=decode_value(data)
                 
                 #chnagement de selecteur
+                #on verifie si le selecteur pour l'annoncer..
                 if selecteur != self.selecteur:
                     if selecteur == self.selecteur_transitoire:
-                        #on a une
+                        #on attend self.selecteur_transitoire_count lectures successives de la position du selecteur 
                         self.selecteur_transitoire_count -= 1
                         if self.selecteur_transitoire_count == 0:
                             #c'ets valide on a un nouveau selecteur
@@ -364,7 +383,9 @@ class MyFrame(wx.Frame):
                         #nouvelle prpospition de selcteur
                         self.selecteur_transitoire = selecteur
                         self.selecteur_transitoire_count = config["const_selecteur_decompte"]
-                    
+
+                #ici ajouter les flag auto ranging / relative mode / old mode 
+
                 self.mesure_valeur.SetLabel(value)
                 # rafraichissement de l'affichage de la valeur de la mesure 
                 self.value = value
